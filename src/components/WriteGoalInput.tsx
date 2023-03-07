@@ -21,6 +21,10 @@ export default function WriteGoalInput({ onCreate }: Props) {
   const onCreateOnEnterKey = (
     e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    if (isTitleFilledIn && !isValidGoal && e.key === 'Enter') {
+      descRef.current?.focus()
+    }
+
     if (e.key === 'Enter' && isValidGoal) {
       onCreate((prev) => [
         ...prev,
