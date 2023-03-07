@@ -13,7 +13,7 @@ export default function Home() {
       <Box p="15px" m="10px">
         <PageContentHeader />
         <Box p="10px" bg="gray.50">
-          <WriteGoalInput />
+          <WriteGoalInput onCreate={setMockGoals} />
           <SimpleGrid gap={5} columns={{ sm: 2, md: 4 }}>
             {mockGoals?.map((goal) => (
               <GoalCard key={goal.title} {...goal} />

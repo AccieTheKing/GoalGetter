@@ -1,6 +1,9 @@
 import { Flex, Input } from '@chakra-ui/react'
+type Props = {
+  onCreate: Dispatch<SetStateAction<Goal[]>>
+}
 
-export default function WriteGoalInput() {
+export default function WriteGoalInput({ onCreate }: Props) {
   return (
     <Flex mb="15px" borderRadius="md" justifyContent="center">
       <Input
