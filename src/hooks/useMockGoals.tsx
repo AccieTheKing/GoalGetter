@@ -1,12 +1,24 @@
 import { GoalStatus } from '@/components/StatusBadge'
-import { useMemo } from 'react'
+import { Goal } from '@/types'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 
-export default function useMockGoals() {
+export default function useMockGoals(): [
+  Goal[],
+  Dispatch<SetStateAction<Goal[]>>
+] {
+  const [goalsList, setGoalsList] = useState<Goal[]>([])
   const allStatusList = useMemo(() => Object.values(GoalStatus), [])
 
-  return allStatusList.map((status, i) => ({
-    title: `Goal ${i + 1}`,
-    description: `Description ${i + 1}`,
-    status: status,
-  }))
+  useEffect(() => {
+    const generatedList: Goal[] = allStatusList.map((status, i) => ({
+      id: i.toString(),
+      title: `Goal ${i + 1}`,
+      description: `Description ${i + 1}`,
+      status,
+    }))
+
+    setGoalsList(generatedList)
+  }, [])
+
+  return [goalsList, setGoalsList]
 }
