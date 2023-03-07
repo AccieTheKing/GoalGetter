@@ -1,18 +1,45 @@
 'use client'
-import Image from 'next/image'
+import GoalCard from '@/components/Cards/GoalCard'
 import PageHeaderToggle from '@/components/PageToggle/PageHeaderToggle'
-import { useState } from 'react'
+import useMockGoals from '@/hooks/useMockGoals'
+import { Box, Button, Flex, Input, SimpleGrid, Spacer } from '@chakra-ui/react'
 
 export default function Home() {
-  const [toggleActive, setToggleActive] = useState(false)
-const mockData = Array.from({ length: 20 }, (_, i) => ({
-  title: `Goal ${i + 1}`,
-  description: `Description ${i + 1}`,
-}))
+  const mockGoals = useMockGoals()
 
   return (
     <main>
-      <PageHeaderToggle active={toggleActive} />
+      <Box p="15px">
+        <Box m="10px">
+          <Flex align="baseline" mb="15px">
+            <PageHeaderToggle active={true} />
+            <Spacer />
+            <Button bg="teal.400" textColor="white" rounded="3xl">
+              Create a new goal
+            </Button>
+          </Flex>
+          <Box p="10px" bg="gray.50">
+            <Flex mb="15px" borderRadius="md" justifyContent="center">
+              <Input
+                placeholder="Write Your Goal"
+                bg="white"
+                size="lg"
+                w="35vw"
+                minW="500px"
+                p="1.5rem"
+                _placeholder={{ color: 'gray.400' }}
+                _focus={{ borderColor: 'teal.400' }}
+              />
+            </Flex>
+
+            <SimpleGrid gap={5} columns={{ sm: 2, md: 4 }}>
+              {mockGoals?.map((goal) => (
+                <GoalCard key={goal.title} {...goal} />
+              ))}
+            </SimpleGrid>
+          </Box>
+        </Box>
+      </Box>
     </main>
   )
 }
