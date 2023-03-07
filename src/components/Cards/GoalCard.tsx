@@ -1,3 +1,4 @@
+import { Goal } from '@/types'
 import {
   Button,
   ButtonGroup,
@@ -12,13 +13,14 @@ import {
 } from '@chakra-ui/react'
 import StatusBadge, { GoalStatus } from '../StatusBadge'
 
-type Props = {
-  title: string
-  description: string
-  status: GoalStatus
-}
+type Props = Goal
 
-export default function GoalCard({ title, description, status }: Props) {
+export default function GoalCard({
+  title,
+  description,
+  status,
+  ...props
+}: Props) {
   return (
     <Card minW="xs" maxW="sm">
       <Stack divider={<Divider color="silver" />}>
