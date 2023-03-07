@@ -10,19 +10,21 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
+import StatusBadge, { GoalStatus } from '../StatusBadge'
 
 type Props = {
   title: string
   description: string
+  status: GoalStatus
 }
 
-export default function GoalCard({ title, description }: Props) {
+export default function GoalCard({ title, description, status }: Props) {
   return (
     <Card minW="xs" maxW="sm">
       <Stack divider={<Divider color="silver" />}>
         <CardHeader>
           <Heading size="md" m="0">
-            {title}
+            {title} <StatusBadge status={status} />
           </Heading>
         </CardHeader>
 
