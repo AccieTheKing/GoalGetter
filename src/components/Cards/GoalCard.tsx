@@ -9,13 +9,20 @@ import {
   Divider,
   Heading,
   Stack,
+  Stat,
+  StatHelpText,
   Text,
 } from '@chakra-ui/react'
 import StatusBadge from '../StatusBadge'
 
 type Props = Goal
 
-export default function GoalCard({ title, description, status }: Props) {
+export default function GoalCard({
+  title,
+  description,
+  status,
+  completeBefore,
+}: Props) {
   return (
     <Card minW="xs" maxW="sm">
       <Stack divider={<Divider color="silver" />}>
@@ -29,12 +36,20 @@ export default function GoalCard({ title, description, status }: Props) {
           <Text fontSize="0.9em">{description}</Text>
         </CardBody>
 
-        <CardFooter>
+        <CardFooter display="column" textAlign="center">
           <ButtonGroup m="auto">
             <Button colorScheme="teal" variant="outline">
               See details
             </Button>
           </ButtonGroup>
+          <Stat mt="0.5rem">
+            <StatHelpText>
+              Deadline:
+              <span style={{ fontWeight: 'bold', marginLeft: '2px' }}>
+                {completeBefore}
+              </span>
+            </StatHelpText>
+          </Stat>
         </CardFooter>
       </Stack>
     </Card>
