@@ -5,4 +5,6 @@ export type Goal = {
   title: string
   description: string
   status: GoalStatus
+  createdAt: string
+  completeBefore: string
 }
