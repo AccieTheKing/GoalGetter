@@ -18,6 +18,7 @@ import StatusBadge from '../StatusBadge'
 type Props = Goal
 
 export default function GoalCard({
+  id,
   title,
   description,
   status,
