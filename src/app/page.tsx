@@ -11,13 +11,6 @@ export default function Home() {
     <main>
       <Box p="15px">
         <Box m="10px">
-          <Flex align="baseline" mb="15px">
-            <PageHeaderToggle active={true} />
-            <Spacer />
-            <Button bg="teal.400" textColor="white" rounded="3xl">
-              Create a new goal
-            </Button>
-          </Flex>
           <Box p="10px" bg="gray.50">
             <Flex mb="15px" borderRadius="md" justifyContent="center">
               <Input
@@ -38,6 +31,8 @@ export default function Home() {
               ))}
             </SimpleGrid>
           </Box>
+      <Box p="15px" m="10px">
+        <PageContentHeader />
         </Box>
       </Box>
     </main>
