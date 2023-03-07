@@ -11,16 +11,11 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import StatusBadge, { GoalStatus } from '../StatusBadge'
+import StatusBadge from '../StatusBadge'
 
 type Props = Goal
 
-export default function GoalCard({
-  title,
-  description,
-  status,
-  ...props
-}: Props) {
+export default function GoalCard({ title, description, status }: Props) {
   return (
     <Card minW="xs" maxW="sm">
       <Stack divider={<Divider color="silver" />}>
