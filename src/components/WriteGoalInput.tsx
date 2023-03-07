@@ -10,7 +10,9 @@ type Props = {
 export default function WriteGoalInput({ onCreate }: Props) {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [showError, setShowError] = useState<string>('')
+  const [date, setDate] = useState<string>(
+    new Date().toLocaleDateString(new Intl.Locale('nl-NL'))
+  )
   const descRef = useRef<HTMLTextAreaElement | null>(null)
 
   const isTitleFilledIn = title.trim().length > 0
