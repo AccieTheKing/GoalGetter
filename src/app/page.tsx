@@ -15,7 +15,7 @@ export default function Home() {
         <Box p="10px" bg="gray.50">
           <WriteGoalInput onCreate={setMockGoals} />
           {mockGoals && mockGoals.length > 0 ? (
-            <SimpleGrid gap={5} columns={{ sm: 2, md: 4 }}>
+            <SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
               {mockGoals.map((goal) => (
                 <GoalCard key={goal.title} {...goal} />
               ))}
