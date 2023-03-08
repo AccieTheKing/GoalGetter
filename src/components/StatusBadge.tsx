@@ -1,11 +1,5 @@
 import { Badge } from '@chakra-ui/react'
-
-export enum GoalStatus {
-  COMPLETED = 'COMPLETED',
-  IN_REVIEW = 'IN_REVIEW',
-  NOT_COMPLETED = 'NOT_COMPLETED',
-  NEW = 'NEW',
-}
+import { GoalStatus } from '@prisma/client'
 
 const badgeStatusColor = {
   [GoalStatus.COMPLETED]: 'green',
