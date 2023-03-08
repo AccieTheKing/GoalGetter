@@ -27,21 +27,17 @@ export default function WriteGoalInput({ onCreate }: Props) {
   const isDateValid = date.trim().length > 0 && new Date(date) > new Date()
   const isValidGoal = isTitleFilledIn && isDescFilledIn && isDateValid
 
-  const onCreateGoal = () => {
+  const { mutateAsync, isSuccess } = api.goalsRouter.createGoal.useMutation()
+
+  const onCreateGoal = async () => {
     if (isValidGoal) {
-      onCreate((prev) => [
-        ...prev,
-        {
-          title,
-          description,
-          id: Date.now().toString(),
-          status: GoalStatus.NOT_COMPLETED,
-          createdAt: new Date().toLocaleDateString(new Intl.Locale('nl-NL')),
-          completeBefore: new Date(date).toLocaleDateString(
-            new Intl.Locale('nl-NL')
-          ),
-        },
-      ])
+      const createdGoal = await mutateAsync({
+        title,
+        description,
+        completeBefore: new Date(date),
+      })
+
+      onCreate((prev) => [...prev, createdGoal])
       setTitle('')
       setDescription('')
     }
