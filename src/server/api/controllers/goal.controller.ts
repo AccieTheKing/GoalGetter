@@ -4,21 +4,21 @@ import {
   ParamsInput,
   UpdateGoalInput,
 } from '@/server/schema/goal.schema'
-import { Context } from '../createContext'
+import { Context } from '@/server/api/createContext'
 import {
   createGoal,
   deleteGoal,
   findAllPosts,
   findUniqueGoal,
   updateGoal,
-} from '../services/goal.services'
+} from '@/server/api/services/goal.services'
 
 export const createGoalHandler = async ({
   input,
   ctx,
 }: {
   input: CreateGoalInput
-  ctx: Context
+  ctx?: Context
 }) => {
   try {
     const USER_ID = '6408634265f1fb962dd039d1' // is going to be replaced with the user id from the context

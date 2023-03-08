@@ -12,12 +12,12 @@ export const createGoalSchema = z.object({
   }),
 })
 
-export const params = z.object({
+export const goalParams = z.object({
   goalId: z.string(),
 })
 
 export const updateGoalSchema = z.object({
-  params,
+  params: goalParams,
   body: createGoalSchema.partial(),
 })
 
@@ -28,5 +28,5 @@ export const filterQuery = z.object({
 
 export type CreateGoalInput = TypeOf<typeof createGoalSchema>
 export type UpdateGoalInput = TypeOf<typeof updateGoalSchema>
-export type ParamsInput = TypeOf<typeof params>
+export type ParamsInput = TypeOf<typeof goalParams>
 export type FilterQueryInput = TypeOf<typeof filterQuery>
