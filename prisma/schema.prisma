@@ -6,12 +6,22 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "mongodb"
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+enum GoalStatus {
+    COMPLETED
+    IN_REVIEW
+    NOT_COMPLETED
+    DEFAULT
+}
+
+model Goal {
+    id             String     @id @default(auto()) @map("_id") @db.ObjectId
+    title          String
+    description    String
+    status         GoalStatus
+    createdAt      DateTime   @default(now())
+    completeBefore DateTime
 }
