@@ -1,4 +1,4 @@
-import { Goal } from '@/types'
+import { api } from '@/utils/api'
 import {
   Button,
   Collapse,
@@ -9,8 +9,8 @@ import {
   Input,
   Textarea,
 } from '@chakra-ui/react'
+import { Goal } from '@prisma/client'
 import { Dispatch, SetStateAction, useRef, useState } from 'react'
-import { GoalStatus } from './StatusBadge'
 
 type Props = {
   onCreate: Dispatch<SetStateAction<Goal[]>>

@@ -1,10 +1,3 @@
-import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
-import {
-  createGoalSchema,
-  filterQuery,
-  goalParams,
-  updateGoalSchema,
-} from '@/server/schema/goal.schema'
 import {
   createGoalHandler,
   deleteGoalHandler,
@@ -12,6 +5,13 @@ import {
   getGoalsHandler,
   updateGoalHandler,
 } from '@/server/api/controllers/goal.controller'
+import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
+import {
+  createGoalSchema,
+  filterQuery,
+  goalParams,
+  updateGoalSchema,
+} from '@/server/schema/goal.schema'
 
 export const goalsRouter = createTRPCRouter({
   createGoal: publicProcedure

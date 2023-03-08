@@ -1,9 +1,3 @@
-import {
-  CreateGoalInput,
-  FilterQueryInput,
-  ParamsInput,
-  UpdateGoalInput,
-} from '@/server/schema/goal.schema'
 import { Context } from '@/server/api/createContext'
 import {
   createGoal,
@@ -12,6 +6,12 @@ import {
   findUniqueGoal,
   updateGoal,
 } from '@/server/api/services/goal.services'
+import {
+  CreateGoalInput,
+  FilterQueryInput,
+  ParamsInput,
+  UpdateGoalInput,
+} from '@/server/schema/goal.schema'
 
 export const createGoalHandler = async ({
   input,
