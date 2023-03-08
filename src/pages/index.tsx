@@ -5,7 +5,7 @@ import useGoals from '@/hooks/useGoals'
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 
 export default function Home() {
-  const [mockGoals, setMockGoals] = useGoals()
+  const [mockGoals, setMockGoals] = useGoals({ withStatus: 'NEW' })
 
   return (
     <main>
