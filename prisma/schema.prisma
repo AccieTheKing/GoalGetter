@@ -14,7 +14,7 @@ enum GoalStatus {
     COMPLETED
     IN_REVIEW
     NOT_COMPLETED
-    DEFAULT
+    NEW
 }
 
 model Goal {

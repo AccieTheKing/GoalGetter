@@ -4,12 +4,12 @@ export enum GoalStatus {
   COMPLETED = 'completed',
   IN_REVIEW = 'in-review',
   NOT_COMPLETED = 'not-completed',
-  DEFAULT = 'default',
+  NEW = 'new',
 }
 
 const badgeStatusColor = {
   [GoalStatus.COMPLETED]: 'green',
-  [GoalStatus.DEFAULT]: '',
+  [GoalStatus.NEW]: '',
   [GoalStatus.IN_REVIEW]: 'purple',
   [GoalStatus.NOT_COMPLETED]: 'red',
 }
