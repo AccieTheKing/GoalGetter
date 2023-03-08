@@ -53,7 +53,9 @@ export const getGoalsHandler = async ({
   filterQuery: FilterQueryInput
 }) => {
   try {
-    const goals = await findAllPosts(filterQuery.page, filterQuery.limit)
+    const goals = await findAllPosts(filterQuery.page, filterQuery.limit, {
+      status: filterQuery.status,
+    })
     return goals
   } catch (error) {
     throw error

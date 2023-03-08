@@ -37,7 +37,11 @@ export const findUniqueGoal = async (
   })) as Goal
 }
 
-export const findAllPosts = async (page: number, limit: number) => {
+export const findAllGoals = async (
+  page: number,
+  limit: number,
+  where?: Prisma.GoalWhereInput
+) => {
   const take = limit || 10
   const skip = (page - 1) * limit
   return (await prisma.goal.findMany({
@@ -53,6 +57,7 @@ export const findAllPosts = async (page: number, limit: number) => {
     },
     skip,
     take,
+    where,
   })) as Goal[]
 }
 
