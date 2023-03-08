@@ -13,7 +13,7 @@ export default function useGoals(
   const { isLoading, data } = api.goalsRouter.getGoals.useQuery({
     page: 1,
     limit: 10,
-    status: props ? props.withStatus : GoalStatus.NEW,
+    status: props?.withStatus,
   })
 
   useEffect(() => {
