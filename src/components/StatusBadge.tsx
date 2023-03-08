@@ -1,10 +1,10 @@
 import { Badge } from '@chakra-ui/react'
 
 export enum GoalStatus {
-  COMPLETED = 'completed',
-  IN_REVIEW = 'in-review',
-  NOT_COMPLETED = 'not-completed',
-  NEW = 'new',
+  COMPLETED = 'COMPLETED',
+  IN_REVIEW = 'IN_REVIEW',
+  NOT_COMPLETED = 'NOT_COMPLETED',
+  NEW = 'NEW',
 }
 
 const badgeStatusColor = {
