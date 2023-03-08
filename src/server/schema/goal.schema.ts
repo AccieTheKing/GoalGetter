@@ -7,7 +7,7 @@ export const createGoalSchema = z.object({
   description: z.string({
     required_error: 'Description of id is required',
   }),
-  completeBerore: z.date({
+  completeBefore: z.date({
     required_error: 'The date that the goal should be completed by is required',
   }),
 })
