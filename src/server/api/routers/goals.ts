@@ -11,7 +11,7 @@ import {
   getGoalHandler,
   getGoalsHandler,
   updateGoalHandler,
-} from '../controllers/goal.controller'
+} from '@/server/api/controllers/goal.controller'
 
 export const goalsRouter = createTRPCRouter({
   createGoal: publicProcedure
@@ -25,10 +25,10 @@ export const goalsRouter = createTRPCRouter({
   deleteGoal: publicProcedure
     .input(goalParams)
     .mutation(({ input }) => deleteGoalHandler({ paramsInput: input })),
-  getPost: publicProcedure
+  getGoal: publicProcedure
     .input(goalParams)
     .query(({ input }) => getGoalHandler({ paramsInput: input })),
-  getPosts: publicProcedure
+  getGoals: publicProcedure
     .input(filterQuery)
     .query(({ input }) => getGoalsHandler({ filterQuery: input })),
   getAll: publicProcedure.query(({ ctx }) => {
