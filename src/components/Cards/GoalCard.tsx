@@ -1,4 +1,3 @@
-import { Goal } from '@/types'
 import {
   Button,
   ButtonGroup,
@@ -13,6 +12,7 @@ import {
   StatHelpText,
   Text,
 } from '@chakra-ui/react'
+import { Goal } from '@prisma/client'
 import StatusBadge from '../StatusBadge'
 
 type Props = Goal
@@ -47,7 +47,9 @@ export default function GoalCard({
             <StatHelpText>
               Deadline:
               <span style={{ fontWeight: 'bold', marginLeft: '2px' }}>
-                {completeBefore}
+                {new Date(completeBefore).toLocaleDateString(
+                  new Intl.Locale('nl-NL')
+                )}
               </span>
             </StatHelpText>
           </Stat>
