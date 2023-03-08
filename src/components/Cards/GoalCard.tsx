@@ -46,11 +46,11 @@ export default function GoalCard({
           <Stat mt="0.5rem">
             <StatHelpText>
               Deadline:
-              <span style={{ fontWeight: 'bold', marginLeft: '2px' }}>
+              <Text display="inline" fontWeight="bold" marginLeft="2px">
                 {new Date(completeBefore).toLocaleDateString(
                   new Intl.Locale('nl-NL')
                 )}
-              </span>
+              </Text>
             </StatHelpText>
           </Stat>
         </CardFooter>
