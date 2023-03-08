@@ -17,6 +17,12 @@ enum GoalStatus {
     NEW
 }
 
+enum UserRole {
+    ADMIN
+    USER
+    REVIEWER
+}
+
 model Goal {
     id             String     @id @default(auto()) @map("_id") @db.ObjectId
     title          String
@@ -24,4 +30,20 @@ model Goal {
     status         GoalStatus
     createdAt      DateTime   @default(now())
     completeBefore DateTime
+    user           User       @relation(fields: [userId], references: [id])
+    userId         String     @db.ObjectId
+
+    @@map("goals")
+}
+
+model User {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    username  String
+    password  String
+    picture   String?
+    role      UserRole @default(USER)
+    createdAt DateTime @default(now())
+    goals     Goal[]
+
+    @@map("users")
 }
