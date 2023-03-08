@@ -27,7 +27,7 @@ model Goal {
     id             String     @id @default(auto()) @map("_id") @db.ObjectId
     title          String
     description    String
-    status         GoalStatus
+    status         GoalStatus @default(NEW)
     createdAt      DateTime   @default(now())
     completeBefore DateTime
     user           User       @relation(fields: [userId], references: [id])
