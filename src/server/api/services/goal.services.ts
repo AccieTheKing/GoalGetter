@@ -47,12 +47,7 @@ export const findAllGoals = async (
   return (await prisma.goal.findMany({
     include: {
       user: {
-        select: {
-          username: true,
-          id: true,
-          picture: true,
-          role: true,
-        },
+        select: { id: true, picture: true, createdAt: true },
       },
     },
     skip,
