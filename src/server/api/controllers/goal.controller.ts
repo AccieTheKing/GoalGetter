@@ -1,8 +1,7 @@
-import { Context } from '@/server/api/createContext'
 import {
   createGoal,
   deleteGoal,
-  findAllPosts,
+  findAllGoals,
   findUniqueGoal,
   updateGoal,
 } from '@/server/api/services/goal.services'
@@ -12,13 +11,14 @@ import {
   ParamsInput,
   UpdateGoalInput,
 } from '@/server/schema/goal.schema'
+import { NextPageContext } from 'next'
 
 export const createGoalHandler = async ({
   input,
   ctx,
 }: {
   input: CreateGoalInput
-  ctx?: Context
+  ctx?: NextPageContext
 }) => {
   try {
     const USER_ID = '6408634265f1fb962dd039d1' // is going to be replaced with the user id from the context
@@ -53,7 +53,7 @@ export const getGoalsHandler = async ({
   filterQuery: FilterQueryInput
 }) => {
   try {
-    const goals = await findAllPosts(filterQuery.page, filterQuery.limit, {
+    const goals = await findAllGoals(filterQuery.page, filterQuery.limit, {
       status: filterQuery.status,
     })
     return goals
