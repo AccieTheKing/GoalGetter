@@ -32,7 +32,7 @@ export const filterQuery = z.object({
       GoalStatus.NEW,
       GoalStatus.NOT_COMPLETED,
     ])
-    .default(GoalStatus.NEW),
+    .optional(),
 })
 
 export type CreateGoalInput = TypeOf<typeof createGoalSchema>
