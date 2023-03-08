@@ -1,14 +1,16 @@
 import { Flex, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 const PageHeaderToggle: React.FC = () => {
   const [toggleActive, setToggleActive] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
-    if (window.location.pathname === '/') setToggleActive(true)
+    if (router.pathname === '/') setToggleActive(true)
     else setToggleActive(false)
-  }, [window.location.pathname])
+  }, [router])
 
   return (
     <Flex gap={25}>
