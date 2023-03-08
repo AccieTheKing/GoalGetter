@@ -1,11 +1,11 @@
 import GoalCard from '@/components/Cards/GoalCard'
 import PageContentHeader from '@/components/Headers/PageContentHeader'
 import WriteGoalInput from '@/components/WriteGoalInput'
-import useMockGoals from '@/hooks/useMockGoals'
+import useGoals from '@/hooks/useGoals'
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 
 export default function Home() {
-  const [mockGoals, setMockGoals] = useMockGoals()
+  const [mockGoals, setMockGoals] = useGoals()
 
   return (
     <main>
