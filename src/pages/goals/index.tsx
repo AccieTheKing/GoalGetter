@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 
 export default function GoalsPage() {
   const router = useRouter()
-  console.log(router.pathname)
 
   return (
     <Box p="15px" m="10px">
