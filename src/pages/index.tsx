@@ -14,7 +14,10 @@ export default function Home() {
         <Box p="10px" bg="gray.50">
           <WriteGoalInput onCreate={setNewGoal} />
           {allNewGoals && allNewGoals.length > 0 ? (
-            <SimpleGrid gap={5} columns={{ base: 1, md: 2, lg: 3, xl: 4 }}>
+            <SimpleGrid
+              gap={5}
+              columns={{ base: 1, md: 2, lg: 3, xl: 4, '2xl': 5 }}
+            >
               {allNewGoals.map((goal) => (
                 <GoalCard key={goal.title} {...goal} />
               ))}
