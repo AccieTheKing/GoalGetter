@@ -11,9 +11,12 @@ export const authOptions: AuthOptions = {
   callbacks: {
     signIn: ({ account, profile }) => {
       if (account?.provider === 'google') {
-        return !!(profile?.email && profile.email.endsWith('@oberon.nl'))
+        return !!(profile?.email && profile?.email?.endsWith('@oberon.nl'))
       }
-      return true // Do different verification for other providers that don't have `email_verified`
+      return false // Do different verification for other providers that don't have `email_verified`
+    },
+    redirect: async ({ baseUrl, url }) => {
+      return baseUrl
     },
   },
 }
