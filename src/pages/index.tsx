@@ -1,6 +1,7 @@
 import GoalCard from '@/components/Cards/GoalCard'
 import Layout from '@/components/Layout'
 import WriteGoalInput from '@/components/WriteGoalInput'
+import updateOutdatedGoals from '@/hooks/updateOutdatedGoals'
 import useGoals from '@/hooks/useGoals'
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
@@ -13,6 +14,7 @@ type Data = {
 
 export default function Home() {
   const [allNewGoals, setNewGoal] = useGoals({ withStatus: 'NEW' })
+  updateOutdatedGoals()
 
   return (
     <Layout>
