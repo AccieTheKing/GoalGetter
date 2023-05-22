@@ -10,6 +10,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { Goal } from '@prisma/client'
+import { useSession } from 'next-auth/react'
 import { Dispatch, SetStateAction, useRef, useState } from 'react'
 
 type Props = {
@@ -21,6 +22,7 @@ export default function WriteGoalInput({ onCreate }: Props) {
   const [description, setDescription] = useState<string>('')
   const [date, setDate] = useState<string>('')
   const descRef = useRef<HTMLTextAreaElement | null>(null)
+  const { data } = useSession()
 
   const isTitleFilledIn = title.trim().length > 0
   const isDescFilledIn = description.trim().length > 0
@@ -32,6 +34,7 @@ export default function WriteGoalInput({ onCreate }: Props) {
   const onCreateGoal = async () => {
     if (isValidGoal) {
       const createdGoal = await mutateAsync({
+        createdById: data?.user.id as string,
         title,
         description,
         completeBefore: new Date(date),

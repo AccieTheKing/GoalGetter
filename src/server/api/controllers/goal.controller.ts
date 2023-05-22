@@ -15,18 +15,16 @@ import { NextPageContext } from 'next'
 
 export const createGoalHandler = async ({
   input,
-  ctx,
 }: {
   input: CreateGoalInput
   ctx?: NextPageContext
 }) => {
   try {
-    const USER_ID = '6408634265f1fb962dd039d1' // is going to be replaced with the user id from the context
     const createdGoal = await createGoal({
       title: input.title,
       description: input.description,
       completeBefore: input.completeBefore,
-      user: { connect: { id: USER_ID } },
+      user: { connect: { id: input.createdById } },
     })
     return createdGoal
   } catch (error) {

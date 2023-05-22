@@ -13,6 +13,9 @@ const goalStatus = z.enum([
  * These are the required fields for creating a goal.
  */
 export const createGoalSchema = z.object({
+  createdById: z.string({
+    required_error: 'The user id of the creator is required',
+  }),
   title: z.string({
     required_error: 'Title of goal is required',
   }),
