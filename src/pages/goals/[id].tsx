@@ -9,11 +9,10 @@ import { useRouter } from 'next/router'
 
 export default function GoalDetailPage() {
   const goalId = useRouter().query.id as string
-  const { status, data: session } = useSession()
-  const { data, isLoading } = api.goalsRouter.getGoal.useQuery({ goalId })
+  const { data } = api.goalsRouter.getGoal.useQuery({ goalId })
 
   return (
-    <Layout status={status} data={session}>
+    <Layout>
       <BrowserTitleHeading title={data?.title ?? ''} />
       <Flex direction="column" alignItems="center" justifyContent="center">
         <Text textAlign="center" fontSize="6xl" fontWeight="extrabold">
