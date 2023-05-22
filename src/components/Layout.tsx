@@ -1,13 +1,10 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
-import { Session } from 'next-auth'
-import Link from 'next/link'
+import { Box } from '@chakra-ui/react'
+import { useSession } from 'next-auth/react'
 import { ReactNode } from 'react'
 import PageContentHeader from './Headers/PageContentHeader'
 
 type Props = {
   children: ReactNode
-  status?: 'loading' | 'authenticated' | 'unauthenticated'
-  data: Session | null
 }
 
 /**
@@ -17,7 +14,8 @@ type Props = {
  * @param param0
  * @returns
  */
-export default function Layout({ children, status, data }: Props) {
+export default function Layout({ children }: Props) {
+  const { status, data } = useSession()
   if (status && status === 'loading') {
     return <div>Loading...</div>
   }
@@ -25,18 +23,7 @@ export default function Layout({ children, status, data }: Props) {
   return (
     <Box p="15px" m="10px">
       <PageContentHeader user={data?.user} />
-      {data ? (
-        children
-      ) : (
-        <Flex h="90vh" justifyContent="center" alignItems="center">
-          <Box>
-            <Text fontSize="2rem" fontWeight="extrabold">
-              Please Login to Create Goals
-            </Text>
-            <Link href="/auth">Go to login page</Link>
-          </Box>
-        </Flex>
-      )}
+      {children}
     </Box>
   )
 }
