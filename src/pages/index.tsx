@@ -3,11 +3,7 @@ import Layout from '@/components/Layout'
 import WriteGoalInput from '@/components/WriteGoalInput'
 import useGoals from '@/hooks/useGoals'
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react'
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getServerSession, Session } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
 
@@ -15,13 +11,11 @@ type Data = {
   session: Session
 }
 
-export default function Home({
-  session,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home() {
   const [allNewGoals, setNewGoal] = useGoals({ withStatus: 'NEW' })
 
   return (
-    <Layout data={session}>
+    <Layout>
       <Box p="10px" bg="gray.50">
         <WriteGoalInput onCreate={setNewGoal} />
         {allNewGoals && allNewGoals.length > 0 ? (
