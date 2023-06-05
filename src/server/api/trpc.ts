@@ -18,7 +18,7 @@ import { type CreateNextContextOptions } from '@trpc/server/adapters/next'
 
 import { prisma } from '@/server/db'
 
-type CreateContextOptions = Record<string, never>
+type CreateContextOptions = Record<string, never> | { session: Session }
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use it, you can export
@@ -33,6 +33,7 @@ type CreateContextOptions = Record<string, never>
 const createInnerTRPCContext = (_opts: CreateContextOptions) => {
   return {
     prisma,
+    session: _opts.session as unknown as Session,
   }
 }
 
@@ -42,7 +43,14 @@ const createInnerTRPCContext = (_opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (_opts: CreateNextContextOptions) => {
+import { getServerAuthSession } from '../auth'
+export const createTRPCContext = async (_opts: CreateNextContextOptions) => {
+  const { req, res } = _opts
+  const session = await getServerAuthSession({ req, res })
+
+  if (session) {
+    return createInnerTRPCContext({ session })
+  }
   return createInnerTRPCContext({})
 }
 
@@ -51,8 +59,9 @@ export const createTRPCContext = (_opts: CreateNextContextOptions) => {
  *
  * This is where the tRPC API is initialized, connecting the context and transformer.
  */
-import { initTRPC } from '@trpc/server'
+import { initTRPC, TRPCError } from '@trpc/server'
 import superjson from 'superjson'
+import { Session } from 'next-auth'
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
@@ -83,3 +92,28 @@ export const createTRPCRouter = t.router
  * are logged in.
  */
 export const publicProcedure = t.procedure
+
+/**
+ * This is a middleware that can be used to enforce that a user is authenticated before they can
+ * query a procedure.
+ */
+const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
+  console.log(!!ctx.session, !!ctx.session?.user, ctx.session?.user)
+  if (!ctx.session || !ctx.session?.user) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' })
+  }
+  return next({
+    ctx: {
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  })
+})
+
+/**
+ * Protected (authenticated) procedure
+ * This is the base piece you use to build new queries and mutations on your tRPC API. It
+ * guarantees that a user querying is authorized, and you can access user session data.
+ *
+ * @see https://trpc.io/docs/middleware
+ */
+export const protectedProcedure = t.procedure.use(enforceUserIsAuthed)
