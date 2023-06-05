@@ -5,7 +5,11 @@ import {
   getGoalsHandler,
   updateGoalHandler,
 } from '@/server/api/controllers/goal.controller'
-import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
+import {
+  createTRPCRouter,
+  publicProcedure,
+  protectedProcedure,
+} from '@/server/api/trpc'
 import {
   createGoalSchema,
   filterQuery,
@@ -14,24 +18,24 @@ import {
 } from '@/server/schema/goal.schema'
 
 export const goalsRouter = createTRPCRouter({
-  createGoal: publicProcedure
+  createGoal: protectedProcedure
     .input(createGoalSchema)
     .mutation(({ input, ctx }) => createGoalHandler({ input })),
-  updateGoal: publicProcedure
+  updateGoal: protectedProcedure
     .input(updateGoalSchema)
     .mutation(({ input }) =>
       updateGoalHandler({ input, paramsInput: input.params })
     ),
-  deleteGoal: publicProcedure
+  deleteGoal: protectedProcedure
     .input(goalParams)
     .mutation(({ input }) => deleteGoalHandler({ paramsInput: input })),
-  getGoal: publicProcedure
+  getGoal: protectedProcedure
     .input(goalParams)
     .query(({ input }) => getGoalHandler({ paramsInput: input })),
-  getGoals: publicProcedure
+  getGoals: protectedProcedure
     .input(filterQuery)
     .query(({ input }) => getGoalsHandler({ filterQuery: input })),
-  getAll: publicProcedure.query(({ ctx }) => {
+  getAll: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.goal.findMany()
   }),
 })
