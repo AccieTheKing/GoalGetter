@@ -39,7 +39,7 @@ export default function PageContentHeader({ user }: Props) {
         </Button>
         <MenuButton>
           <Image
-            src={user.image ?? '/images/placeholder.png'}
+            src={user?.image ?? '/vercel.svg'}
             rounded="full"
             width={50}
             height={50}
