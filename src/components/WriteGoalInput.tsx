@@ -9,19 +9,15 @@ import {
   Input,
   Textarea,
 } from '@chakra-ui/react'
-import { Goal } from '@prisma/client'
 import { useSession } from 'next-auth/react'
-import { Dispatch, SetStateAction, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
-type Props = {
-  onCreate: Dispatch<SetStateAction<Goal[]>>
-}
-
-export default function WriteGoalInput({ onCreate }: Props) {
+export default function WriteGoalInput() {
+  const utils = api.useContext()
+  const descRef = useRef<HTMLTextAreaElement | null>(null)
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [date, setDate] = useState<string>('')
-  const descRef = useRef<HTMLTextAreaElement | null>(null)
   const { data } = useSession()
 
   const isTitleFilledIn = title.trim().length > 0
@@ -29,20 +25,25 @@ export default function WriteGoalInput({ onCreate }: Props) {
   const isDateValid = date.trim().length > 0 && new Date(date) > new Date()
   const isValidGoal = isTitleFilledIn && isDescFilledIn && isDateValid
 
-  const { mutateAsync, isSuccess } = api.goalsRouter.createGoal.useMutation()
+  const { mutate } = api.goalsRouter.createGoal.useMutation()
 
-  const onCreateGoal = async () => {
+  const onCreateGoal = () => {
     if (isValidGoal) {
-      const createdGoal = await mutateAsync({
-        createdById: data?.user.id as string,
-        title,
-        description,
-        completeBefore: new Date(date),
-      })
-
-      onCreate((prev) => [...prev, createdGoal])
-      setTitle('')
-      setDescription('')
+      mutate(
+        {
+          createdById: data?.user.id as string,
+          title,
+          description,
+          completeBefore: new Date(date),
+        },
+        {
+          onSuccess() {
+            setTitle('')
+            setDescription('')
+            utils.goalsRouter.getGoals.invalidate()
+          },
+        }
+      )
     }
   }
 
