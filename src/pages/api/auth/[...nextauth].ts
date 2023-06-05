@@ -4,6 +4,7 @@ import NextAuth, { AuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 
 const prisma = new PrismaClient()
+
 if (!process.env.NEXTAUTH_SECRET) {
   throw new Error(
     'please provide process.env.NEXTAUTH_SECRET environment variable'
@@ -21,6 +22,7 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
   callbacks: {
     session: async ({ session, user }) => {
+      if (!session.user) return session
       session.user.id = user.id
       return session
     },
