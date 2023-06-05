@@ -5,11 +5,11 @@ import z, { TypeOf } from 'zod'
  * These are the required fields for creating a note.
  */
 export const createNoteSchema = z.object({
+  goalId: z.string({
+    required_error: 'The goal id of the note is required',
+  }),
   createdById: z.string({
     required_error: 'The user id of the creator is required',
-  }),
-  title: z.string({
-    required_error: 'Title of note is required',
   }),
   description: z.string({
     required_error: 'Description of note is required',
