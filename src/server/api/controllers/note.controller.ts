@@ -7,12 +7,15 @@ export const createNoteHandler = async ({
   input: CreateNoteInput
 }) => {
   try {
-      const createdNote = await createNote({
-          title: input.title,
-          description: input.description,
-            
+    const createdNote = await createNote({
+      goal: { connect: { id: input.goalId } },
+      user: { connect: { id: input.createdById } },
+      description: input.description,
     })
-  } catch (error) {}
+    return createdNote
+  } catch (error) {
+    throw error
+  }
 }
 
 export const getNoteHandler = async ({
