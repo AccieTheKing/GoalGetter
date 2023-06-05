@@ -39,9 +39,9 @@ model Goal {
 
 model Note {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
-    title       String
     description String
     createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
     goal        Goal     @relation(fields: [goalId], references: [id])
     goalId      String   @db.ObjectId
     userId      String   @db.ObjectId
