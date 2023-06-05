@@ -13,19 +13,19 @@ type Data = {
 }
 
 export default function Home() {
-  const [allNewGoals, setNewGoal] = useGoals({ withStatus: 'NEW' })
+  const goals = useGoals({ withStatus: 'NEW' })
   updateOutdatedGoals()
 
   return (
     <Layout>
       <Box p="10px" bg="gray.50">
-        <WriteGoalInput onCreate={setNewGoal} />
-        {allNewGoals && allNewGoals.length > 0 ? (
+        <WriteGoalInput />
+        {goals && goals.length > 0 ? (
           <SimpleGrid
             gap={5}
             columns={{ base: 1, md: 2, lg: 3, xl: 4, '2xl': 4 }}
           >
-            {allNewGoals.map((goal) => (
+            {goals.map((goal) => (
               <GoalCard key={goal.title} {...goal} />
             ))}
           </SimpleGrid>
