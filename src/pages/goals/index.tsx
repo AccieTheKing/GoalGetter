@@ -7,7 +7,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 
 export default function GoalsPage() {
-  const [allGoals, setAllGoals] = useGoals()
+  const allGoals = useGoals()
 
   return (
     <Layout>
