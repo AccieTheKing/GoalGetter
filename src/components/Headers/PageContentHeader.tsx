@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Flex,
   Image,
@@ -11,6 +10,8 @@ import {
 } from '@chakra-ui/react'
 import { DefaultSession } from 'next-auth'
 import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { IoIosArrowBack } from 'react-icons/io'
 import PageHeaderToggle from '../PageToggle/PageHeaderToggle'
 
 type Props = {
@@ -18,11 +19,8 @@ type Props = {
 }
 
 export default function PageContentHeader({ user }: Props) {
+  const router = useRouter()
   const onLogout = () => signOut()
-
-  if (!user) {
-    return <Box></Box>
-  }
 
   return (
     <Menu>
@@ -32,6 +30,17 @@ export default function PageContentHeader({ user }: Props) {
         justifyContent="center"
         alignItems="center"
       >
+        <Button
+          bg="transparent"
+          w="fit-content"
+          h="fit-content"
+          borderRadius="full"
+          p={2}
+          mr={5}
+          onClick={router.back}
+        >
+          <IoIosArrowBack color="#000" size={30} />
+        </Button>
         <PageHeaderToggle />
         <Spacer />
         <Button bg="teal.400" textColor="white" rounded="3xl">
