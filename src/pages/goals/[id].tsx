@@ -4,7 +4,6 @@ import StatusBadge from '@/components/StatusBadge'
 import { api } from '@/utils/api'
 import { Box, Divider, Flex, Heading, Text } from '@chakra-ui/react'
 import { GoalStatus } from '@prisma/client'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 export default function GoalDetailPage() {
