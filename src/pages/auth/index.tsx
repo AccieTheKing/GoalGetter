@@ -6,10 +6,17 @@ import { authOptions } from '../api/auth/[...nextauth]'
 
 export default function Login() {
   return (
-    <Box display="flex" h="100vh" justifyContent="center">
-      <Button onClick={() => signIn()}>
-        <Text>Hoiii</Text>
-      </Button>
+    <Box display="flex" flexDirection="column" height="100vh">
+      <Box p={5}>
+        <Text fontSize="2rem" fontWeight="extrabold" textAlign="center">
+          GoalGetter Login
+        </Text>
+      </Box>
+      <Box>
+        <Button onClick={() => signIn()}>
+          <Text>Hoiii</Text>
+        </Button>
+      </Box>
     </Box>
   )
 }
