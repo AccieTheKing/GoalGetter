@@ -1,5 +1,13 @@
-import { CreateNoteInput } from '@/server/schema/note.schema'
-import { createNote } from '@/server/api/services/note.services'
+import {
+  CreateNoteInput,
+  FilterQueryInput,
+  ParamsInput,
+} from '@/server/schema/note.schema'
+import {
+  createNote,
+  findAllNotes,
+  findUniqueNote,
+} from '@/server/api/services/note.services'
 
 export const createNoteHandler = async ({
   input,
@@ -18,11 +26,29 @@ export const createNoteHandler = async ({
   }
 }
 
-export const getNoteHandler = async ({
+export const getNoteHandler = async ({ input }: { input: ParamsInput }) => {
+  try {
+    const note = await findUniqueNote({ id: input.noteId })
+    return note
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getNotesHandler = async ({
   input,
 }: {
-  input: CreateNoteInput
-}) => {}
+  input: FilterQueryInput
+}) => {
+  try {
+    const notes = await findAllNotes(input.page, input.limit, {
+      goalId: input.goalId,
+    })
+    return notes
+  } catch (error) {
+    throw error
+  }
+}
 
 export const updateNoteHandler = async ({
   input,
