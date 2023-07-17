@@ -13,7 +13,6 @@ import { useSession } from 'next-auth/react'
 import { useRef, useState } from 'react'
 
 export default function WriteGoalInput() {
-  const utils = api.useContext()
   const descRef = useRef<HTMLTextAreaElement | null>(null)
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -40,7 +39,6 @@ export default function WriteGoalInput() {
           onSuccess() {
             setTitle('')
             setDescription('')
-            utils.goalsRouter.getGoals.invalidate()
           },
         }
       )
