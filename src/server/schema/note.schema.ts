@@ -38,6 +38,7 @@ export const updateNoteSchema = z.object({
 export const filterQuery = z.object({
   limit: z.number().default(1),
   page: z.number().default(10),
+  goalId: z.string().optional(),
 })
 
 /**
