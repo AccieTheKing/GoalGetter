@@ -1,6 +1,6 @@
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { GetServerSidePropsContext } from 'next'
-import { getServerSession } from 'next-auth'
+import { getServerSession, Session } from 'next-auth'
 
 /**
  * This function will try to grab the session from the request headers.
@@ -13,7 +13,7 @@ import { getServerSession } from 'next-auth'
 export const getServerAuthSession = async (ctx: {
   req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
-}) => {
+}): Promise<Session | null> => {
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
   return session
 }
