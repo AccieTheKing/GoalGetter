@@ -47,7 +47,7 @@ export const findAllNotes = async (
 }
 
 export const updateNote = async (
-  where: Partial<Prisma.NoteWhereUniqueInput>,
+  where: Prisma.NoteWhereUniqueInput,
   data: Prisma.NoteUpdateInput,
   select?: Prisma.NoteSelect
 ) => {

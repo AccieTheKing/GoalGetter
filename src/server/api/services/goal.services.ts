@@ -57,7 +57,7 @@ export const findAllGoals = async (
 }
 
 export const updateGoal = async (
-  where: Partial<Prisma.GoalWhereUniqueInput>,
+  where: Prisma.GoalWhereUniqueInput,
   data: Prisma.GoalUpdateInput,
   select?: Prisma.GoalSelect
 ) => {
