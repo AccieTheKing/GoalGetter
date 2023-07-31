@@ -31,17 +31,16 @@ export const findUniqueNote = async (
 
 export const findAllNotes = async (
   page: number,
-  limit: number,
+  limit?: number,
   where?: Prisma.NoteWhereInput
 ) => {
-  const skip = (page - 1) * limit
-  const take = limit || 10
+  const skip = limit ? (page - 1) * limit : undefined
+  const take = limit ? limit : undefined
+
   return (await prisma.note.findMany({
     include: {
       user: { select: { id: true, image: true, role: true } },
     },
-    skip,
-    take,
     where,
   })) as Note[]
 }

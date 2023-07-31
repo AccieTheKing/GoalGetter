@@ -41,7 +41,7 @@ export const getNotesHandler = async ({
   input: FilterQueryInput
 }) => {
   try {
-    const notes = await findAllNotes(input.page, input.limit, {
+    const notes = await findAllNotes(input?.page, input?.limit, {
       goalId: input.goalId,
     })
     return notes
