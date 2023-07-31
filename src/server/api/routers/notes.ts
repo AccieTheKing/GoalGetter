@@ -16,7 +16,7 @@ export const notesRouter = createTRPCRouter({
     .mutation(({ input, ctx }) => createNoteHandler({ input })),
   getNotes: publicProcedure
     .input(filterQuery)
-    .query(({ input }) => getNotesHandler({ input: { limit: 10, page: 1 } })),
+    .query(({ input }) => getNotesHandler({ input })),
   getNote: publicProcedure
     .input(noteParams)
     .query(({ input }) => getNoteHandler({ input })),
